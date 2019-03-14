@@ -4,10 +4,11 @@
 [![Linux Build Status](https://travis-ci.org/richfitz/thor.svg?branch=master)](https://travis-ci.org/richfitz/thor)
 [![Windows Build status](https://ci.appveyor.com/api/projects/status/github/richfitz/thor?svg=true)](https://ci.appveyor.com/project/richfitz/thor)
 [![codecov.io](https://codecov.io/github/richfitz/thor/coverage.svg?branch=master)](https://codecov.io/github/richfitz/thor?branch=master)
+[![](http://www.r-pkg.org/badges/version/thor)](https://cran.r-project.org/package=thor)
 
 
 
-An R interface to [LMDB](https://github.com/LMDB/lmdb).  LMDB is an embedded transactional key-value store and this package provides R mappings to it.  It wraps the entire LMDB interface.
+An R interface to [LMDB](https://github.com/LMDB/lmdb).  LMDB is an embedded transactional key-value store and this package provides R mappings to it.  It wraps the entire LMDB interface, except for support for duplicated keys.
 
 ## Documentation
 
@@ -36,7 +37,7 @@ env
 ##     begin(db = NULL, write = FALSE, sync = NULL, metasync =  ...
 ##     with_transaction(fun, db = NULL, write = FALSE)
 ##   Databases:
-##     open_database(key = NULL, reversekey = FALSE, dupsort =  ...
+##     open_database(key = NULL, reversekey = FALSE, create = TRUE)
 ##     drop_database(db, delete = TRUE)
 ##   Management:
 ##     sync(force = FALSE)
@@ -47,13 +48,13 @@ env
 ##     reader_check()
 ##   Helpers:
 ##     get(key, missing_is_error = TRUE, as_raw = NULL, db = NULL)
-##     put(key, value, dupdata = TRUE, overwrite = TRUE, append ...
-##     del(key, value = NULL, db = NULL)
+##     put(key, value, overwrite = TRUE, append = FALSE, db = NULL)
+##     del(key, db = NULL)
 ##     exists(key, db = NULL)
 ##     list(starts_with = NULL, as_raw = FALSE, size = NULL, db ...
 ##     mget(key, as_raw = NULL, db = NULL)
-##     mput(key, value, dupdata = TRUE, overwrite = TRUE, appen ...
-##     mdel(key, value = NULL, db = NULL)
+##     mput(key, value, overwrite = TRUE, append = FALSE, db =  ...
+##     mdel(key, db = NULL)
 ```
 
 
@@ -110,18 +111,17 @@ txn
 ##     cursor()
 ##   Data:
 ##     get(key, missing_is_error = TRUE, as_proxy = FALSE, as_r ...
-##     put(key, value, dupdata = TRUE, overwrite = TRUE, append ...
-##     del(key, value = NULL)
+##     put(key, value, overwrite = TRUE, append = FALSE)
+##     del(key)
 ##     exists(key)
 ##     list(starts_with = NULL, as_raw = FALSE, size = NULL)
 ##     mget(key, as_proxy = FALSE, as_raw = NULL)
-##     mput(key, value, dupdata = TRUE, overwrite = TRUE, appen ...
-##     mdel(key, value = NULL)
+##     mput(key, value, overwrite = TRUE, append = FALSE)
+##     mdel(key)
 ##     replace(key, value, as_raw = NULL)
 ##     pop(key, as_raw = NULL)
 ##   Compare:
 ##     cmp(a, b)
-##     dcmp(a, b)
 ```
 
 Only one write transaction is active at a given point in time.  There can be an unlimited number of read transactions.
@@ -140,6 +140,14 @@ There is a cursor interface for advanced features (see the vignette).  Both keys
 lldb is an extremely fast database, but this package may be much less fast than the underlying library.  In order to make the interface safe to use from R, there is quite a bit of error checking, and the length of time involved in calling methods in R6 objects is orders of magnitude slower than performing an action on an lldb database (this is not R6's fault and primarily caused by the cost of S3 method lookup for `$` on an object with a class attribute).  The vectorised functions will help here (e.g., `mget`, `mput`), so prefer these where practical if speed is a concern.
 
 ## Installation
+
+Install from CRAN with
+
+```r
+install.packages("thor")
+```
+
+If you want to try the development version from github, you can install with
 
 ```r
 devtools::install_github("richfitz/thor", upgrade = FALSE)
