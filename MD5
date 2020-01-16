@@ -1,4 +1,4 @@
-fddafbe9c7e3a8877a213b69ee56cfce *DESCRIPTION
+d84374824ebadc182479e4adeca9c930 *DESCRIPTION
 9d6da6f15e2f1793660824195e6027ce *LICENSE
 0f0ee71e8a6795ffa6c99bbcc8354a9c *NAMESPACE
 3bed830233d228c8cb549735c4d8998e *NEWS.md
@@ -14,12 +14,12 @@ c4c6d948caf5725425ad8888bb0c7fe1 *R/util.R
 59b017c46795904cbb2ef675b5ede051 *R/util_assert.R
 13666d7f7465270e01a9188b55289ec5 *R/zzz.R
 ceeea91e2b6be8db2ce42b3e5ba1606d *README.md
-287570e51a90fb2d540fb80b9426ca51 *build/vignette.rds
+0b5ebe408b79c363aa186be209c80531 *build/vignette.rds
 99f801d38f5a6753d4f221340ec59360 *cleanup
 153d07ef052c4a37a8fac23bc6031972 *inst/LICENSE.lmdb
 ba6b93717640525d4ece5c60372feae2 *inst/doc/thor.R
 c55a093674d67204da2b2079d74c3c37 *inst/doc/thor.Rmd
-3316e1a7f8d8970b01c7362144574bf3 *inst/doc/thor.html
+24f5f4c7890021e7a57259bdb1962ae1 *inst/doc/thor.html
 735611966fd90783234705e65cf2ca06 *man/mdb_cursor.Rd
 14da783f72426cb9fd297d90687f4ee9 *man/mdb_dbi.Rd
 bbbfd5471b4823244012119123b6f3ce *man/mdb_env.Rd
@@ -31,7 +31,8 @@ ab3942abce02576bb9732c6e42596f5a *src/Makevars.win
 053cdad59e4aa0bd101bea0ce8b3433a *src/lmdb/Makefile
 2730eb61731e1c2bd1537d2d5477cf16 *src/lmdb/README.md
 79d141099393a487d941112154f86424 *src/lmdb/lmdb.h
-6bb3f5ab3a77073c341fda458bf4e0c5 *src/lmdb/mdb.c
+d4ed5c0a9da4b39168555b86bcd3b24d *src/lmdb/mdb.c
+16c7cdbafe04d4c33da08b36be78c5fa *src/lmdb/mdb.patch
 cbbb9b768a6ad99486f36bc4cbffa418 *src/lmdb/midl.c
 d9006f893201cd7cb3c25eec39b44243 *src/lmdb/midl.h
 57e9f2b350505165e4b35184ba716d89 *src/lmdb/version
@@ -42,7 +43,7 @@ ae0084031e7d4bcf8436f96baf6e7e93 *src/util.c
 aa42ba47bda78f847cbcedb9c8636d48 *src/util.h
 8c22593a3d280f022e44d3b26510a3d0 *tests/testthat.R
 d69859890a9a2f936da8eeec911ffdf2 *tests/testthat/helper-thor.R
-9695fa2768f287048fc9a0028e243333 *tests/testthat/test-cursor.R
+d106173e5aa7e88cf24420b4888afcc2 *tests/testthat/test-cursor.R
 0ef88de4708c45f3a9ba25aa9cdceb0b *tests/testthat/test-dbi.R
 d9bdb69d5eb539f60b079789692ec083 *tests/testthat/test-env.R
 a047f5843dc8f9865f9529a3c734ec4a *tests/testthat/test-proxy.R
