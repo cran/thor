@@ -1,6 +1,6 @@
 Package: thor
 Title: Interface to 'LMDB'
-Version: 1.1.1
+Version: 1.1.2
 Authors@R: c(person("Rich", "FitzJohn", role = c("aut", "cre"),
     email = "rich.fitzjohn@gmail.com"),
     person("Howard", "Chu", role = c("aut", "cph")),
@@ -19,13 +19,13 @@ URL: https://github.com/richfitz/thor
 BugReports: https://github.com/richfitz/thor/issues
 Imports: R6, storr
 Suggests: ids, knitr, rmarkdown, testthat
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 VignetteBuilder: knitr
 ByteCompile: true
 Encoding: UTF-8
 Language: en-GB
 NeedsCompilation: yes
-Packaged: 2020-01-14 13:56:31 UTC; rich
+Packaged: 2020-05-15 13:11:09 UTC; root
 Author: Rich FitzJohn [aut, cre],
   Howard Chu [aut, cph],
   Symas Corporation [cph],
@@ -33,4 +33,4 @@ Author: Rich FitzJohn [aut, cre],
   The OpenLDAP Foundation [cph]
 Maintainer: Rich FitzJohn <rich.fitzjohn@gmail.com>
 Repository: CRAN
-Date/Publication: 2020-01-16 23:50:02 UTC
+Date/Publication: 2020-05-15 14:20:03 UTC
