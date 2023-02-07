@@ -1,292 +1,351 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>Introduction</title>
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-<script type="text/javascript">
-window.onload = function() {
-  var imgs = document.getElementsByTagName('img'), i, img;
-  for (i = 0; i < imgs.length; i++) {
-    img = imgs[i];
-    // center an image if it is the only element of its parent
-    if (img.parentElement.childElementCount === 1)
-      img.parentElement.style.textAlign = 'center';
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Rich FitzJohn" />
+
+<meta name="date" content="2023-02-07" />
+
+<title>thor</title>
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
   }
-};
-</script>
-
-<!-- Styles for R syntax highlighter -->
-<style type="text/css">
-   pre .operator,
-   pre .paren {
-     color: rgb(104, 118, 135)
-   }
-
-   pre .literal {
-     color: #990073
-   }
-
-   pre .number {
-     color: #099;
-   }
-
-   pre .comment {
-     color: #998;
-     font-style: italic
-   }
-
-   pre .keyword {
-     color: #900;
-     font-weight: bold
-   }
-
-   pre .identifier {
-     color: rgb(0, 0, 0);
-   }
-
-   pre .string {
-     color: #d14;
-   }
+  .sourceCode {
+    overflow: visible;
+  }
 </style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 
-<!-- R syntax highlighter -->
-<script type="text/javascript">
-var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
-hljs.initHighlightingOnLoad();
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
 </script>
 
 
 
-<style type="text/css">
-body, td {
-   font-family: sans-serif;
-   background-color: white;
-   font-size: 13px;
-}
 
-body {
-  max-width: 800px;
-  margin: auto;
-  padding: 1em;
-  line-height: 20px;
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
 }
-
-tt, code, pre {
-   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
 }
-
-h1 {
-   font-size:2.2em;
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
 }
-
-h2 {
-   font-size:1.8em;
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
 }
-
-h3 {
-   font-size:1.4em;
+#TOC ul ul {
+margin-left: -2em;
 }
-
-h4 {
-   font-size:1.0em;
+#TOC li {
+line-height: 16px;
 }
-
-h5 {
-   font-size:0.9em;
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
 }
-
-h6 {
-   font-size:0.8em;
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
 }
-
-a:visited {
-   color: rgb(50%, 0%, 50%);
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
 }
-
-pre, img {
-  max-width: 100%;
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
 }
 pre {
-  overflow-x: auto;
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
 }
-pre code {
-   display: block; padding: 0.5em;
+pre:not([class]) {
+background-color: #f7f7f7;
 }
-
 code {
-  font-size: 92%;
-  border: 1px solid #ccc;
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
 }
-
-code[class] {
-  background-color: #F8F8F8;
+p > code, li > code {
+padding: 2px 0px;
 }
-
-table, td, th {
-  border: none;
+div.figure {
+text-align: center;
 }
-
-blockquote {
-   color:#666666;
-   margin:0;
-   padding-left: 1em;
-   border-left: 0.5em #EEE solid;
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
 }
-
-hr {
-   height: 0px;
-   border-bottom: none;
-   border-top-width: thin;
-   border-top-style: dotted;
-   border-top-color: #999999;
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
 }
-
-@media print {
-   * {
-      background: transparent !important;
-      color: black !important;
-      filter:none !important;
-      -ms-filter: none !important;
-   }
-
-   body {
-      font-size:12pt;
-      max-width:100%;
-   }
-
-   a, a:visited {
-      text-decoration: underline;
-   }
-
-   hr {
-      visibility: hidden;
-      page-break-before: always;
-   }
-
-   pre, blockquote {
-      padding-right: 1em;
-      page-break-inside: avoid;
-   }
-
-   tr, img {
-      page-break-inside: avoid;
-   }
-
-   img {
-      max-width: 100% !important;
-   }
-
-   @page :left {
-      margin: 15mm 20mm 15mm 10mm;
-   }
-
-   @page :right {
-      margin: 15mm 10mm 15mm 20mm;
-   }
-
-   p, h2, h3 {
-      orphans: 3; widows: 3;
-   }
-
-   h2, h3 {
-      page-break-after: avoid;
-   }
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
 }
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
+
 
 
 
 </head>
 
 <body>
+
+
+
+
+<h1 class="title toc-ignore">thor</h1>
+<h4 class="author">Rich FitzJohn</h4>
+<h4 class="date">2023-02-07</h4>
+
+
+
+<div id="introduction" class="section level2">
 <h2>Introduction</h2>
-
-<p><code>thor</code> provides an wrapper around LMBD; the lightning memory-mapped
-database.  This is an embedded key-value store; there is no server
-(like SQLite) - the database exists purely on disk and uses file
-locking to manage concurrent access between processes.</p>
-
-<p>Key-value stores are simple systems for persistently storing values
-against keys.  In the case of <code>thor</code>, both the keys and the data
-can be strings or (raw) data.  This provides a low-level building
-block on which other applications can be built.  The complications
-come from trying to efficiently query the store, or patterns like
-&ldquo;add a new value but only if the previous value was <code>foo</code>&rdquo;.</p>
-
-<p>This package does not provide a faithful 1:1 mapping of the
-underlying LMDB C API because that requires too much care at the R
-level not to crash R!  Instead, probably at the cost of some
-performance, <code>thor</code> provides a set of wrappers that try to prevent
-crashes by invalidating objects in the correct order.  The approach
-taken in is very similar to the <a href="https://github.com/dw/py-lmdb">python interface to LMDB;
-<code>py-lmdb</code></a>.</p>
-
-<p>Because the whole point of interacting with a database is side
-effects, <code>thor</code> uses <a href="https://cran.r-project.org/package=R6">R6</a>
-for the interface.  This has the unfortunate effect of complicating
-the documentation somewhat because R&#39;s documentation is focussed
-heavily on <em>functions</em> and the package provides only one function
-(<code>thor::mdb_env</code>) with everything else happening through <em>methods</em>
-of this object, and the objects that it creates.</p>
-
-<p><code>thor</code> tries to expose the underlying LMDB interface in a nested
-set of objects of increasing power (and complexity).  The objects
-that the package provides are</p>
-
+<p><code>thor</code> provides an wrapper around LMDB; the lightning memory-mapped database. This is an embedded key-value store; there is no server (like SQLite) - the database exists purely on disk and uses file locking to manage concurrent access between processes.</p>
+<p>Key-value stores are simple systems for persistently storing values against keys. In the case of <code>thor</code>, both the keys and the data can be strings or (raw) data. This provides a low-level building block on which other applications can be built. The complications come from trying to efficiently query the store, or patterns like “add a new value but only if the previous value was <code>foo</code>”.</p>
+<p>This package does not provide a faithful 1:1 mapping of the underlying LMDB C API because that requires too much care at the R level not to crash R! Instead, probably at the cost of some performance, <code>thor</code> provides a set of wrappers that try to prevent crashes by invalidating objects in the correct order. The approach taken in is very similar to the <a href="https://github.com/jnwatson/py-lmdb">python interface to LMDB; <code>py-lmdb</code></a>.</p>
+<p>Because the whole point of interacting with a database is side effects, <code>thor</code> uses <a href="https://cran.r-project.org/package=R6">R6</a> for the interface. This has the unfortunate effect of complicating the documentation somewhat because R’s documentation is focussed heavily on <em>functions</em> and the package provides only one function (<code>thor::mdb_env</code>) with everything else happening through <em>methods</em> of this object, and the objects that it creates.</p>
+<p><code>thor</code> tries to expose the underlying LMDB interface in a nested set of objects of increasing power (and complexity). The objects that the package provides are</p>
 <ul>
-<li><p><code>mdb_env</code>: the environment object, which is the interface to the
-database file.  Everything starts here!</p></li>
-<li><p><code>mdb_dbi</code>: a database handle.  Multiple databases may be stored
-within a single environment and if more than one is used then
-this object is passed about to control which database things
-affect.</p></li>
-<li><p><code>mdb_txn</code>: a transaction object.  LMDB is a <em>transactional</em>
-database and this object is used to carry out actions within a
-transaction (such as getting and putting data).</p></li>
-<li><p><code>mdb_cursor</code>: a cursor.  To go beyond basic <code>get</code>/<code>put</code>, cursors*
-*are required.  These can be used to iterate through the ##
-*database, and to find entries.</p></li>
-<li><p><code>mdb_proxy</code>: a proxy for a result.  This is used to defer copying
-data from the database into R for as long as possible.  It&#39;s a
-bit of an experiment so we&#39;ll see how useful it turns out to be.</p></li>
+<li><p><code>mdb_env</code>: the environment object, which is the interface to the database file. Everything starts here!</p></li>
+<li><p><code>mdb_dbi</code>: a database handle. Multiple databases may be stored within a single environment and if more than one is used then this object is passed about to control which database things affect.</p></li>
+<li><p><code>mdb_txn</code>: a transaction object. LMDB is a <em>transactional</em> database and this object is used to carry out actions within a transaction (such as getting and putting data).</p></li>
+<li><p><code>mdb_cursor</code>: a cursor. To go beyond basic <code>get</code>/<code>put</code>, cursors<em> </em>are required. These can be used to iterate through the ## *database, and to find entries.</p></li>
+<li><p><code>mdb_proxy</code>: a proxy for a result. This is used to defer copying data from the database into R for as long as possible. It’s a bit of an experiment so we’ll see how useful it turns out to be.</p></li>
 </ul>
-
-<p>All of these objects have their own help pages, even though only
-<code>mdb_env</code> has an actual function.  On those help pages every public
-function described (this is the same set that is printed when
-displaying the objects).  There are other functions that can be
-reached using <code>$</code> - functions beginning with a <code>.</code> should be
-considered <strong>private</strong>; using these can crash R.  Other functions
-(such as <code>format</code>) exist because of the way thor uses R6.</p>
-
-<p>For basic operations, one can just use the <code>mdb_env</code> object and
-ignore the rest of the package.  To do more interesting things,
-you&#39;ll need transactions (<code>mdb_txn</code>), and then perhaps you&#39;ll need
-cursors (<code>mdb_cursor</code>).  The proxy objects are available if you use
-transactions.</p>
-
+<p>All of these objects have their own help pages, even though only <code>mdb_env</code> has an actual function. On those help pages every public function described (this is the same set that is printed when displaying the objects). There are other functions that can be reached using <code>$</code> - functions beginning with a <code>.</code> should be considered <strong>private</strong>; using these can crash R. Other functions (such as <code>format</code>) exist because of the way thor uses R6.</p>
+<p>For basic operations, one can just use the <code>mdb_env</code> object and ignore the rest of the package. To do more interesting things, you’ll need transactions (<code>mdb_txn</code>), and then perhaps you’ll need cursors (<code>mdb_cursor</code>). The proxy objects are available if you use transactions.</p>
+</div>
+<div id="the-environment" class="section level2">
 <h2>The environment</h2>
-
-<p>The first step is to create an &ldquo;environment&rdquo;; this holds one or
-more &ldquo;databases&rdquo; (though in the most simple case you can forget
-that detail and just treat the environment as a database).</p>
-
-<pre><code class="r">env &lt;- thor::mdb_env(tempfile())
-</code></pre>
-
-<p>The first argument to <code>thor::mdb_env</code> is the filename - this
-is a directory where the database files will be kept.  Here I am
-using a temporary file for the database.</p>
-
-<p>As an R6 object, the database environment has a number of methods
-that can be used to perform actions on the database.  The print
-method groups these by theme:</p>
-
-<pre><code class="r">env
-</code></pre>
-
+<p>The first step is to create an “environment”; this holds one or more “databases” (though in the most simple case you can forget that detail and just treat the environment as a database).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">env &lt;-<span class="st"> </span>thor<span class="op">::</span><span class="kw">mdb_env</span>(<span class="kw">tempfile</span>())</a></code></pre></div>
+<p>The first argument to <code>thor::mdb_env</code> is the filename - this is a directory where the database files will be kept. Here I am using a temporary file for the database.</p>
+<p>As an R6 object, the database environment has a number of methods that can be used to perform actions on the database. The print method groups these by theme:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">env</a></code></pre></div>
 <pre><code>## &lt;mdb_env&gt;
 ##   Informational:
 ##     path()
@@ -316,176 +375,73 @@ method groups these by theme:</p>
 ##     list(starts_with = NULL, as_raw = FALSE, size = NULL, db ...
 ##     mget(key, as_raw = NULL, db = NULL)
 ##     mput(key, value, overwrite = TRUE, append = FALSE, db =  ...
-##     mdel(key, db = NULL)
-</code></pre>
-
-<p>The last group <code>Helpers</code> are wrappers that let you ignore the
-transactional nature of LMDB if you just want to do really simple
-things.</p>
-
+##     mdel(key, db = NULL)</code></pre>
+<p>The last group <code>Helpers</code> are wrappers that let you ignore the transactional nature of LMDB if you just want to do really simple things.</p>
 <p>The database is currently empty:</p>
-
-<pre><code class="r">env$list()
-</code></pre>
-
-<pre><code>## character(0)
-</code></pre>
-
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">env<span class="op">$</span><span class="kw">list</span>()</a></code></pre></div>
+<pre><code>## character(0)</code></pre>
 <p>But we can add some data to it:</p>
-
-<pre><code class="r">for (i in 1:10) {
-  env$put(ids::adjective_animal(),
-          ids::random_id())
-}
-</code></pre>
-
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) {</a>
+<a class="sourceLine" id="cb6-2" title="2">  env<span class="op">$</span><span class="kw">put</span>(ids<span class="op">::</span><span class="kw">adjective_animal</span>(),</a>
+<a class="sourceLine" id="cb6-3" title="3">          ids<span class="op">::</span><span class="kw">random_id</span>())</a>
+<a class="sourceLine" id="cb6-4" title="4">}</a></code></pre></div>
 <p>Now there are 10 <em>keys</em> in the database, each holding a value:</p>
-
-<pre><code class="r">keys &lt;- env$list()
-keys
-</code></pre>
-
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">keys &lt;-<span class="st"> </span>env<span class="op">$</span><span class="kw">list</span>()</a>
+<a class="sourceLine" id="cb7-2" title="2">keys</a></code></pre></div>
 <pre><code>##  [1] &quot;careful_gaur&quot;                    &quot;necessary_hen&quot;                  
 ##  [3] &quot;preagricultural_icterinewarbler&quot; &quot;rhombohedral_walrus&quot;            
 ##  [5] &quot;uninspirable_muntjac&quot;            &quot;unterrestrial_oryx&quot;             
 ##  [7] &quot;upstanding_vixen&quot;                &quot;waiting_xiaosaurus&quot;             
-##  [9] &quot;wet_pullet&quot;                      &quot;zealous_illadopsis&quot;
-</code></pre>
-
-<p>LMDB stores keys in sorted order (not necessarily R&#39;s sorted order</p>
-
-<ul>
-<li>you can see how LMDB sorts things with the <code>cmp</code> method of a
-transaction - see <code>?mdb_txn</code>), so <code>list</code> will return things in that
-order.</li>
-</ul>
-
+##  [9] &quot;wet_pullet&quot;                      &quot;zealous_illadopsis&quot;</code></pre>
+<p>LMDB stores keys in sorted order (not necessarily R’s sorted order - you can see how LMDB sorts things with the <code>cmp</code> method of a transaction - see <code>?mdb_txn</code>), so <code>list</code> will return things in that order.</p>
 <p>Each <em>key</em> has a <em>value</em> (in this case just a hex string)</p>
-
-<pre><code class="r">env$get(keys[[1]])
-</code></pre>
-
-<pre><code>## [1] &quot;48a003eff4c5ad386aaff1f8df8fcc7e&quot;
-</code></pre>
-
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">env<span class="op">$</span><span class="kw">get</span>(keys[[<span class="dv">1</span>]])</a></code></pre></div>
+<pre><code>## [1] &quot;ee2e8ad8f31ae0b2f80934a6b7881c41&quot;</code></pre>
 <p>Delete a key with</p>
-
-<pre><code class="r">env$del(keys[[1]])
-</code></pre>
-
-<pre><code>## [1] TRUE
-</code></pre>
-
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">env<span class="op">$</span><span class="kw">del</span>(keys[[<span class="dv">1</span>]])</a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
 <p>and now there are only 9 keys</p>
-
-<pre><code class="r">length(env$list())
-</code></pre>
-
-<pre><code>## [1] 9
-</code></pre>
-
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">length</span>(env<span class="op">$</span><span class="kw">list</span>())</a></code></pre></div>
+<pre><code>## [1] 9</code></pre>
 <p>Test for existence of a key with <code>exists</code></p>
-
-<pre><code class="r">env$exists(keys[[1]])
-</code></pre>
-
-<pre><code>## [1] FALSE
-</code></pre>
-
-<pre><code class="r">env$exists(keys[[2]])
-</code></pre>
-
-<pre><code>## [1] TRUE
-</code></pre>
-
-<p>The <code>mget</code> method will get multiple keys at once, <code>mset</code> will set
-multiple key/value pairs at once and <code>mdel</code> will delete multiple
-keys at once.</p>
-
-<pre><code class="r">env$mdel(keys)
-</code></pre>
-
-<pre><code>##  [1] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-</code></pre>
-
-<p>For anything more complicated than this you would want to use
-transactions (see below).</p>
-
-<p>The <code>Informational</code> methods all return information about the state
-of the LMDB environment;</p>
-
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">env<span class="op">$</span><span class="kw">exists</span>(keys[[<span class="dv">1</span>]])</a></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">env<span class="op">$</span><span class="kw">exists</span>(keys[[<span class="dv">2</span>]])</a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>The <code>mget</code> method will get multiple keys at once, <code>mset</code> will set multiple key/value pairs at once and <code>mdel</code> will delete multiple keys at once.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">env<span class="op">$</span><span class="kw">mdel</span>(keys)</a></code></pre></div>
+<pre><code>##  [1] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
+<p>For anything more complicated than this you would want to use transactions (see below).</p>
+<p>The <code>Informational</code> methods all return information about the state of the LMDB environment;</p>
 <p>The path that the data is stored in</p>
-
-<pre><code class="r">env$path()
-</code></pre>
-
-<pre><code>## [1] &quot;/tmp/RtmpGjQTnY/file17f5576026ba&quot;
-</code></pre>
-
-<p>which will contain two files - the actual data and a lock file (see
-lmdb&#39;s documentation for more on these).</p>
-
-<pre><code class="r">dir(env$path())
-</code></pre>
-
-<pre><code>## [1] &quot;data.mdb&quot; &quot;lock.mdb&quot;
-</code></pre>
-
-<p>Flags that the environment was opened with (this corresponds to the
-arguments to the <code>thor::mdb_env</code> function)</p>
-
-<pre><code class="r">env$flags()
-</code></pre>
-
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">env<span class="op">$</span><span class="kw">path</span>()</a></code></pre></div>
+<pre><code>## [1] &quot;/tmp/Rtmpa0AJCK/file2066f2706bce60&quot;</code></pre>
+<p>which will contain two files - the actual data and a lock file (see lmdb’s documentation for more on these).</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">dir</span>(env<span class="op">$</span><span class="kw">path</span>())</a></code></pre></div>
+<pre><code>## [1] &quot;data.mdb&quot; &quot;lock.mdb&quot;</code></pre>
+<p>Flags that the environment was opened with (this corresponds to the arguments to the <code>thor::mdb_env</code> function)</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1">env<span class="op">$</span><span class="kw">flags</span>()</a></code></pre></div>
 <pre><code>##   subdir readonly writemap metasync     sync mapasync     lock  rdahead 
 ##     TRUE    FALSE    FALSE     TRUE     TRUE    FALSE     TRUE     TRUE 
 ##  meminit 
-##     TRUE
-</code></pre>
-
-<p>A couple of different forms of (somewhat cryptic) information about
-the state of the environment</p>
-
-<pre><code class="r">env$info()
-</code></pre>
-
+##     TRUE</code></pre>
+<p>A couple of different forms of (somewhat cryptic) information about the state of the environment</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">env<span class="op">$</span><span class="kw">info</span>()</a></code></pre></div>
 <pre><code>##    mapsize  last_pgno last_txnid maxreaders numreaders 
-##    1048576          7         12        126          1
-</code></pre>
-
-<pre><code class="r">env$stat()
-</code></pre>
-
+##    1048576          7         12        126          1</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1">env<span class="op">$</span><span class="kw">stat</span>()</a></code></pre></div>
 <pre><code>##          psize          depth   branch_pages     leaf_pages overflow_pages 
 ##           4096              0              0              0              0 
 ##        entries 
-##              0
-</code></pre>
-
-<p>(Note <code>entries</code> in <code>env$stat()</code> is the number of keys in the
-database)</p>
-
+##              0</code></pre>
+<p>(Note <code>entries</code> in <code>env$stat()</code> is the number of keys in the database)</p>
+</div>
+<div id="transactions" class="section level2">
 <h2>Transactions</h2>
-
-<p>LMDB is <em>transactional</em>; everything that happens to the database,
-read or write, happens as a transaction.  For a write transaction
-either the whole transaction happens or none of it happens.  For
-both read and write transactions, the &ldquo;view&rdquo; of the database is
-consistent from the beginning to the end of a transaction.  So if
-you have a read transaction and while it is doing things a write
-transaction writes to the database, the read transaction does not
-&ldquo;see&rdquo; these changes.  You can only have one write transaction at
-once, but as many read transactions as you&#39;d like.</p>
-
-<pre><code class="r">txn &lt;- env$begin(write = TRUE)
-</code></pre>
-
-<p>As for <code>mdb_env</code>, the transaction object prints methods grouped by
-theme</p>
-
-<pre><code class="r">txn
-</code></pre>
-
+<p>LMDB is <em>transactional</em>; everything that happens to the database, read or write, happens as a transaction. For a write transaction either the whole transaction happens or none of it happens. For both read and write transactions, the “view” of the database is consistent from the beginning to the end of a transaction. So if you have a read transaction and while it is doing things a write transaction writes to the database, the read transaction does not “see” these changes. You can only have one write transaction at once, but as many read transactions as you’d like.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1">txn &lt;-<span class="st"> </span>env<span class="op">$</span><span class="kw">begin</span>(<span class="dt">write =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p>As for <code>mdb_env</code>, the transaction object prints methods grouped by theme</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1">txn</a></code></pre></div>
 <pre><code>## &lt;mdb_txn&gt;
 ##   Informational:
 ##     id()
@@ -507,497 +463,281 @@ theme</p>
 ##     replace(key, value, as_raw = NULL)
 ##     pop(key, as_raw = NULL)
 ##   Compare:
-##     cmp(a, b)
-</code></pre>
-
+##     cmp(a, b)</code></pre>
+<div id="simple-operations-put-get-del-etc" class="section level3">
 <h3>Simple operations (put, get, del, etc)</h3>
-
 <p>To insert data into the database, use the <code>put</code> method</p>
-
-<pre><code class="r">txn$put(&quot;key&quot;, &quot;value&quot;)
-</code></pre>
-
-<p>&hellip;to get it back out again, use the <code>get</code> method</p>
-
-<pre><code class="r">txn$get(&quot;key&quot;)
-</code></pre>
-
-<pre><code>## [1] &quot;value&quot;
-</code></pre>
-
-<p>&hellip;to delete it, use the <code>del</code> method, which returns <code>TRUE</code> if
-the object was deleted and <code>FALSE</code> if not</p>
-
-<pre><code class="r">txn$del(&quot;key&quot;)
-</code></pre>
-
-<pre><code>## [1] TRUE
-</code></pre>
-
-<pre><code class="r">txn$del(&quot;key&quot;)
-</code></pre>
-
-<pre><code>## [1] FALSE
-</code></pre>
-
-<p>To test if an key exists or not, use the <code>exists</code> method (which
-uses a cursor internally - see below)</p>
-
-<pre><code class="r">txn$exists(&quot;key&quot;)
-</code></pre>
-
-<pre><code>## [1] FALSE
-</code></pre>
-
-<p>The helper functions <code>mget</code>, <code>mput</code> and <code>mdel</code> functions do <code>get</code> /
-<code>put</code> and <code>del</code> to multiple keys at once, more efficiently than
-looping in R:</p>
-
-<pre><code class="r">values &lt;- ids::sentence(length(keys), style = &quot;sentence&quot;)
-txn$mput(keys, values)
-</code></pre>
-
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">txn<span class="op">$</span><span class="kw">put</span>(<span class="st">&quot;key&quot;</span>, <span class="st">&quot;value&quot;</span>)</a></code></pre></div>
+<p>…to get it back out again, use the <code>get</code> method</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1">txn<span class="op">$</span><span class="kw">get</span>(<span class="st">&quot;key&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;value&quot;</code></pre>
+<p>…to delete it, use the <code>del</code> method, which returns <code>TRUE</code> if the object was deleted and <code>FALSE</code> if not</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1">txn<span class="op">$</span><span class="kw">del</span>(<span class="st">&quot;key&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1">txn<span class="op">$</span><span class="kw">del</span>(<span class="st">&quot;key&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p>To test if an key exists or not, use the <code>exists</code> method (which uses a cursor internally - see below)</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1">txn<span class="op">$</span><span class="kw">exists</span>(<span class="st">&quot;key&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p>The helper functions <code>mget</code>, <code>mput</code> and <code>mdel</code> functions do <code>get</code> / <code>put</code> and <code>del</code> to multiple keys at once, more efficiently than looping in R:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1">values &lt;-<span class="st"> </span>ids<span class="op">::</span><span class="kw">sentence</span>(<span class="kw">length</span>(keys), <span class="dt">style =</span> <span class="st">&quot;sentence&quot;</span>)</a>
+<a class="sourceLine" id="cb43-2" title="2">txn<span class="op">$</span><span class="kw">mput</span>(keys, values)</a></code></pre></div>
 <p>To list keys, use <code>list</code></p>
-
-<pre><code class="r">txn$list()
-</code></pre>
-
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1">txn<span class="op">$</span><span class="kw">list</span>()</a></code></pre></div>
 <pre><code>##  [1] &quot;careful_gaur&quot;                    &quot;necessary_hen&quot;                  
 ##  [3] &quot;preagricultural_icterinewarbler&quot; &quot;rhombohedral_walrus&quot;            
 ##  [5] &quot;uninspirable_muntjac&quot;            &quot;unterrestrial_oryx&quot;             
 ##  [7] &quot;upstanding_vixen&quot;                &quot;waiting_xiaosaurus&quot;             
-##  [9] &quot;wet_pullet&quot;                      &quot;zealous_illadopsis&quot;
-</code></pre>
-
+##  [9] &quot;wet_pullet&quot;                      &quot;zealous_illadopsis&quot;</code></pre>
 <p>And to fetch multiple values (<code>as_raw</code> is explained below)</p>
-
-<pre><code class="r">txn$mget(keys[1:3], as_raw = FALSE)
-</code></pre>
-
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1">txn<span class="op">$</span><span class="kw">mget</span>(keys[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="dt">as_raw =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;21 upbeat walruses assembling madly&quot;  
 ## [2] &quot;4 eager lizards spurting purposefully&quot;
-## [3] &quot;7 unkempt weasels hobbling youthfully&quot;
-</code></pre>
-
+## [3] &quot;7 unkempt weasels hobbling youthfully&quot;</code></pre>
 <p>Or delete multiple values</p>
-
-<pre><code class="r">txn$mdel(keys[1:3])
-</code></pre>
-
-<pre><code>## [1] TRUE TRUE TRUE
-</code></pre>
-
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1">txn<span class="op">$</span><span class="kw">mdel</span>(keys[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>])</a></code></pre></div>
+<pre><code>## [1] TRUE TRUE TRUE</code></pre>
 <p><code>exists</code> is itself always vectorised</p>
-
-<pre><code class="r">txn$exists(keys)
-</code></pre>
-
-<pre><code>##  [1] FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-</code></pre>
-
-<p>Because the database is transactional, we can now either use
-<code>txn$commit()</code> to save the changes or <code>txn$abort()</code> to discard the
-changes.</p>
-
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1">txn<span class="op">$</span><span class="kw">exists</span>(keys)</a></code></pre></div>
+<pre><code>##  [1] FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
+<p>Because the database is transactional, we can now either use <code>txn$commit()</code> to save the changes or <code>txn$abort()</code> to discard the changes.</p>
+</div>
+<div id="multiple-transactions-at-once" class="section level3">
 <h3>Multiple transactions at once</h3>
-
-<p>As well as being able to roll back a transaction, the other
-function they serve is that each transaction gets a consistent view
-of the database.  At this point we have one write transaction
-running, but it&#39;s not committed yet.  So if we start another
-transaction, it will not see any of the uncommitted &ldquo;changes&rdquo; that
-our transaction has made:</p>
-
-<pre><code class="r">txn_new &lt;- env$begin()
-txn_new$list()
-</code></pre>
-
-<pre><code>## character(0)
-</code></pre>
-
-<p>(or equivalently, <code>env$list()</code>).  Because of the design of
-LMDB, you cannot have multiple active write transactions at once</p>
-
-<pre><code class="r">env$put(&quot;key&quot;, &quot;value&quot;)
-</code></pre>
-
-<pre><code>## Error in self$.check_write(): Write transaction is already active for this environment
-</code></pre>
-
-<pre><code class="r">env$begin(write = TRUE)
-</code></pre>
-
-<pre><code>## Error in self$.check_write(): Write transaction is already active for this environment
-</code></pre>
-
-<p>(if a write transaction is made by another process against the same
-LMDB database, then it will wait for our transaction to complete
-before its write transaction will start - this will cause R to be
-unresponsive during this time)</p>
-
-<p>Let&#39;s commit the changes made:</p>
-
-<pre><code class="r">txn$commit()
-</code></pre>
-
+<p>As well as being able to roll back a transaction, the other function they serve is that each transaction gets a consistent view of the database. At this point we have one write transaction running, but it’s not committed yet. So if we start another transaction, it will not see any of the uncommitted “changes” that our transaction has made:</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1">txn_new &lt;-<span class="st"> </span>env<span class="op">$</span><span class="kw">begin</span>()</a>
+<a class="sourceLine" id="cb52-2" title="2">txn_new<span class="op">$</span><span class="kw">list</span>()</a></code></pre></div>
+<pre><code>## character(0)</code></pre>
+<p>(or equivalently, <code>env$list()</code>). Because of the design of LMDB, you cannot have multiple active write transactions at once</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1">env<span class="op">$</span><span class="kw">put</span>(<span class="st">&quot;key&quot;</span>, <span class="st">&quot;value&quot;</span>)</a></code></pre></div>
+<pre><code>## Error in self$.check_write(): Write transaction is already active for this environment</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1">env<span class="op">$</span><span class="kw">begin</span>(<span class="dt">write =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>## Error in self$.check_write(): Write transaction is already active for this environment</code></pre>
+<p>(if a write transaction is made by another process against the same LMDB database, then it will wait for our transaction to complete before its write transaction will start - this will cause R to be unresponsive during this time)</p>
+<p>Let’s commit the changes made:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1">txn<span class="op">$</span><span class="kw">commit</span>()</a></code></pre></div>
 <p>After being committed a transaction cannot be reused:</p>
-
-<pre><code class="r">txn$list()
-</code></pre>
-
-<pre><code>## Error in mdb_cursor_open(self$.ptr, self$.db$.ptr): txn has been cleaned up; can&#39;t use!
-</code></pre>
-
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1">txn<span class="op">$</span><span class="kw">list</span>()</a></code></pre></div>
+<pre><code>## Error in mdb_cursor_open(self$.ptr, self$.db$.ptr): txn has been cleaned up; can&#39;t use!</code></pre>
 <p>New transactions can now see the changes</p>
-
-<pre><code class="r">env$list()
-</code></pre>
-
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1">env<span class="op">$</span><span class="kw">list</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;rhombohedral_walrus&quot;  &quot;uninspirable_muntjac&quot; &quot;unterrestrial_oryx&quot;  
 ## [4] &quot;upstanding_vixen&quot;     &quot;waiting_xiaosaurus&quot;   &quot;wet_pullet&quot;          
-## [7] &quot;zealous_illadopsis&quot;
-</code></pre>
-
-<p>But importantly <em>old ones can&#39;t</em></p>
-
-<pre><code class="r">txn_new$list()
-</code></pre>
-
-<pre><code>## character(0)
-</code></pre>
-
-<p>This is because the old transaction has a consistent view of the
-database - from the point that it starts to the point that it ends,
-a read-only transaction will see the same data and a read-write
-transaction will only see changes that it has made.</p>
-
+## [7] &quot;zealous_illadopsis&quot;</code></pre>
+<p>But importantly <em>old ones can’t</em></p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1">txn_new<span class="op">$</span><span class="kw">list</span>()</a></code></pre></div>
+<pre><code>## character(0)</code></pre>
+<p>This is because the old transaction has a consistent view of the database - from the point that it starts to the point that it ends, a read-only transaction will see the same data and a read-write transaction will only see changes that it has made.</p>
 <p>(cleaning things up a little)</p>
-
-<pre><code class="r">txn_new$abort()
-env$mdel(keys)
-</code></pre>
-
-<pre><code>##  [1] FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-</code></pre>
-
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1">txn_new<span class="op">$</span><span class="kw">abort</span>()</a>
+<a class="sourceLine" id="cb65-2" title="2">env<span class="op">$</span><span class="kw">mdel</span>(keys)</a></code></pre></div>
+<pre><code>##  [1] FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
+</div>
+<div id="non-string-data" class="section level3">
 <h3>Non-string data</h3>
-
-<p>thor (and LMDB) can handle two types of data; strings (as above)
-and raw vectors.  Raw vectors can be used to serialise R objects
-using <code>serialize</code>, which allows storing of arbitrary data.  This is
-the approach taken by
-<a href="https://cran.r-project.org/package=redux"><code>redux</code></a> among other
-packages.</p>
-
-<p>All strings can be represented in raw vectors but the reverse is
-not true; character strings may not contain the null byte and the
-resulting string may not make sense.  thor uses the presence of a
-null byte as a heuristic when it needs to test if a value is raw or
-not.</p>
-
-<p>So the string &ldquo;hello&rdquo; can be converted to raw:</p>
-
-<pre><code class="r">charToRaw(&quot;hello&quot;)
-</code></pre>
-
-<pre><code>## [1] 68 65 6c 6c 6f
-</code></pre>
-
+<p>thor (and LMDB) can handle two types of data; strings (as above) and raw vectors. Raw vectors can be used to serialise R objects using <code>serialize</code>, which allows storing of arbitrary data. This is the approach taken by <a href="https://cran.r-project.org/package=redux"><code>redux</code></a> among other packages.</p>
+<p>All strings can be represented in raw vectors but the reverse is not true; character strings may not contain the null byte and the resulting string may not make sense. thor uses the presence of a null byte as a heuristic when it needs to test if a value is raw or not.</p>
+<p>So the string “hello” can be converted to raw:</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1"><span class="kw">charToRaw</span>(<span class="st">&quot;hello&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] 68 65 6c 6c 6f</code></pre>
 <p>But the set of bytes <code>2a 00 ff</code> cannot be:</p>
-
-<pre><code class="r">rawToChar(as.raw(c(42, 0, 255)))
-</code></pre>
-
-<pre><code>## Error in rawToChar(as.raw(c(42, 0, 255))): embedded nul in string: &#39;*\0\xff&#39;
-</code></pre>
-
-<p>This poses some problems for specifying and predicting return
-types, which will be explored below. thor tries hard to set the
-return type predictably; a few boolean arguments to the function
-determine the type rather than the contents of the data.</p>
-
-<pre><code class="r">txn &lt;- env$begin(write = TRUE)
-</code></pre>
-
-<p>First, this is why one might want to store raw data in a database.
-Suppose we want to store the contents of <code>mtcars</code> as a value.  It&#39;s
-not a string so we can&#39;t do</p>
-
-<pre><code class="r">txn$put(&quot;mtcars&quot;, mtcars)
-</code></pre>
-
-<pre><code>## Error in mdb_put(self$.ptr, self$.db$.ptr, key, value, overwrite, append): Invalid data type for &#39;value&#39;; expected string or raw
-</code></pre>
-
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1"><span class="kw">rawToChar</span>(<span class="kw">as.raw</span>(<span class="kw">c</span>(<span class="dv">42</span>, <span class="dv">0</span>, <span class="dv">255</span>)))</a></code></pre></div>
+<pre><code>## Error in rawToChar(as.raw(c(42, 0, 255))): embedded nul in string: &#39;*\0\xff&#39;</code></pre>
+<p>This poses some problems for specifying and predicting return types, which will be explored below. thor tries hard to set the return type predictably; a few boolean arguments to the function determine the type rather than the contents of the data.</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1">txn &lt;-<span class="st"> </span>env<span class="op">$</span><span class="kw">begin</span>(<span class="dt">write =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p>First, this is why one might want to store raw data in a database. Suppose we want to store the contents of <code>mtcars</code> as a value. It’s not a string so we can’t do</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1">txn<span class="op">$</span><span class="kw">put</span>(<span class="st">&quot;mtcars&quot;</span>, mtcars)</a></code></pre></div>
+<pre><code>## Error in mdb_put(self$.ptr, self$.db$.ptr, key, value, overwrite, append): Invalid data type for &#39;value&#39;; expected string or raw</code></pre>
 <p>First we should <em>serialise</em> it to raw:</p>
-
-<pre><code class="r">mtcars_ser &lt;- serialize(mtcars, NULL)
-</code></pre>
-
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1">mtcars_ser &lt;-<span class="st"> </span><span class="kw">serialize</span>(mtcars, <span class="ot">NULL</span>)</a></code></pre></div>
 <p>which creates a fairly long string of bytes</p>
-
-<pre><code class="r">str(mtcars_ser)
-</code></pre>
-
-<pre><code>##  raw [1:3807] 58 0a 00 00 ...
-</code></pre>
-
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" title="1"><span class="kw">str</span>(mtcars_ser)</a></code></pre></div>
+<pre><code>##  raw [1:3807] 58 0a 00 00 ...</code></pre>
 <p>converting back from this to an R object is easy with <code>unserialize</code></p>
-
-<pre><code class="r">identical(unserialize(mtcars_ser), mtcars)
-</code></pre>
-
-<pre><code>## [1] TRUE
-</code></pre>
-
-<pre><code class="r">txn$put(&quot;mtcars&quot;, mtcars_ser)
-txn$list()
-</code></pre>
-
-<pre><code>## [1] &quot;mtcars&quot;
-</code></pre>
-
-<p>When fetching the data, thor will work out that this is raw data
-and return a raw vector:</p>
-
-<pre><code class="r">class(txn$get(&quot;mtcars&quot;))
-</code></pre>
-
-<pre><code>## [1] &quot;raw&quot;
-</code></pre>
-
-<p>So we can now store and retrieve arbitrary R objects into the
-database.</p>
-
-<pre><code class="r">identical(unserialize(txn$get(&quot;mtcars&quot;)), mtcars)
-</code></pre>
-
-<pre><code>## [1] TRUE
-</code></pre>
-
-<pre><code class="r">txn$del(&quot;mtcars&quot;)
-</code></pre>
-
-<pre><code>## [1] TRUE
-</code></pre>
-
-<p>Automatic type detection is a mixed blessing (like pitfalls with
-<code>sapply</code>) and thor provides mechanisms for taming it.</p>
-
-<p>Here are two values as raw vectors - one that can be converted to a
-string and one that can&#39;t</p>
-
-<pre><code class="r">bytes &lt;- as.raw(c(42, 0, 255))
-string &lt;- charToRaw(&quot;hello!&quot;)
-
-txn$put(&quot;bytes&quot;, bytes)
-txn$put(&quot;string&quot;, string)
-</code></pre>
-
-<p>The value of the return type is determined both by the value of the
-object and by the value of the argument <code>as_raw</code>.</p>
-
-<table><thead>
-<tr>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" title="1"><span class="kw">identical</span>(<span class="kw">unserialize</span>(mtcars_ser), mtcars)</a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" title="1">txn<span class="op">$</span><span class="kw">put</span>(<span class="st">&quot;mtcars&quot;</span>, mtcars_ser)</a>
+<a class="sourceLine" id="cb79-2" title="2">txn<span class="op">$</span><span class="kw">list</span>()</a></code></pre></div>
+<pre><code>## [1] &quot;mtcars&quot;</code></pre>
+<p>When fetching the data, thor will work out that this is raw data and return a raw vector:</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" title="1"><span class="kw">class</span>(txn<span class="op">$</span><span class="kw">get</span>(<span class="st">&quot;mtcars&quot;</span>))</a></code></pre></div>
+<pre><code>## [1] &quot;raw&quot;</code></pre>
+<p>So we can now store and retrieve arbitrary R objects into the database.</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" title="1"><span class="kw">identical</span>(<span class="kw">unserialize</span>(txn<span class="op">$</span><span class="kw">get</span>(<span class="st">&quot;mtcars&quot;</span>)), mtcars)</a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1">txn<span class="op">$</span><span class="kw">del</span>(<span class="st">&quot;mtcars&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>Automatic type detection is a mixed blessing (like pitfalls with <code>sapply</code>) and thor provides mechanisms for taming it.</p>
+<p>Here are two values as raw vectors - one that can be converted to a string and one that can’t</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1">bytes &lt;-<span class="st"> </span><span class="kw">as.raw</span>(<span class="kw">c</span>(<span class="dv">42</span>, <span class="dv">0</span>, <span class="dv">255</span>))</a>
+<a class="sourceLine" id="cb87-2" title="2">string &lt;-<span class="st"> </span><span class="kw">charToRaw</span>(<span class="st">&quot;hello!&quot;</span>)</a>
+<a class="sourceLine" id="cb87-3" title="3"></a>
+<a class="sourceLine" id="cb87-4" title="4">txn<span class="op">$</span><span class="kw">put</span>(<span class="st">&quot;bytes&quot;</span>, bytes)</a>
+<a class="sourceLine" id="cb87-5" title="5">txn<span class="op">$</span><span class="kw">put</span>(<span class="st">&quot;string&quot;</span>, string)</a></code></pre></div>
+<p>The value of the return type is determined both by the value of the object and by the value of the argument <code>as_raw</code>.</p>
+<table>
+<thead>
+<tr class="header">
 <th>stored</th>
 <th><code>as_raw</code></th>
 <th>result</th>
 </tr>
-</thead><tbody>
-<tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td>string</td>
 <td><code>NULL</code></td>
 <td>character</td>
 </tr>
-<tr>
+<tr class="even">
 <td>string</td>
 <td><code>FALSE</code></td>
 <td>character</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>string</td>
 <td><code>TRUE</code></td>
 <td>raw</td>
 </tr>
-<tr>
+<tr class="even">
 <td>bytes</td>
 <td><code>NULL</code></td>
 <td>character</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>bytes</td>
 <td><code>FALSE</code></td>
 <td>error</td>
 </tr>
-<tr>
+<tr class="even">
 <td>bytes</td>
 <td><code>TRUE</code></td>
 <td>raw</td>
 </tr>
-</tbody></table>
-
+</tbody>
+</table>
 <p>for example</p>
-
-<pre><code class="r">txn$get(&quot;string&quot;)
-</code></pre>
-
-<pre><code>## [1] &quot;hello!&quot;
-</code></pre>
-
-<p>is character because <code>as_raw</code> is <code>NULL</code> and the value <em>can</em> be
-represented as a string, while</p>
-
-<pre><code class="r">txn$get(&quot;bytes&quot;)
-</code></pre>
-
-<pre><code>## [1] 2a 00 ff
-</code></pre>
-
-<p>is raw because the value cannot be represented as a string.
-Specifying <code>as_raw = TRUE</code> will <em>always</em> return raw because
-everything can be represented as raw.  And specifying <code>as_raw =
-FALSE</code> will throw an error for a value that cannot be converted
-into a string.</p>
-
-<p>For <code>mget</code>, it&#39;s a bit trickier because we need to check <em>every</em>
-value as they come out to see if it&#39;s a string or a character.  The
-rules here are:</p>
-
-<table><thead>
-<tr>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" title="1">txn<span class="op">$</span><span class="kw">get</span>(<span class="st">&quot;string&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;hello!&quot;</code></pre>
+<p>is character because <code>as_raw</code> is <code>NULL</code> and the value <em>can</em> be represented as a string, while</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" title="1">txn<span class="op">$</span><span class="kw">get</span>(<span class="st">&quot;bytes&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] 2a 00 ff</code></pre>
+<p>is raw because the value cannot be represented as a string. Specifying <code>as_raw = TRUE</code> will <em>always</em> return raw because everything can be represented as raw. And specifying <code>as_raw = FALSE</code> will throw an error for a value that cannot be converted into a string.</p>
+<p>For <code>mget</code>, it’s a bit trickier because we need to check <em>every</em> value as they come out to see if it’s a string or a character. The rules here are:</p>
+<table>
+<thead>
+<tr class="header">
 <th>stored</th>
 <th><code>as_raw</code></th>
 <th>container</th>
 <th>contents</th>
 </tr>
-</thead><tbody>
-<tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td>string</td>
 <td><code>NULL</code></td>
 <td>list</td>
 <td>character</td>
 </tr>
-<tr>
+<tr class="even">
 <td>string</td>
 <td><code>FALSE</code></td>
 <td>character</td>
 <td>(character)</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>string</td>
 <td><code>TRUE</code></td>
 <td>list</td>
 <td>raw</td>
 </tr>
-<tr>
+<tr class="even">
 <td>bytes</td>
 <td><code>NULL</code></td>
 <td>list</td>
 <td>raw</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>bytes</td>
 <td><code>FALSE</code></td>
 <td>error</td>
 <td>(error)</td>
 </tr>
-<tr>
+<tr class="even">
 <td>bytes</td>
 <td><code>TRUE</code></td>
 <td>list</td>
 <td>raw</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>mixed</td>
 <td><code>NULL</code></td>
 <td>list</td>
 <td>mixed</td>
 </tr>
-<tr>
+<tr class="even">
 <td>mixed</td>
 <td><code>FALSE</code></td>
 <td>error</td>
 <td>(error)</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>mixed</td>
 <td><code>NULL</code></td>
 <td>list</td>
 <td>raw</td>
 </tr>
-</tbody></table>
-
-<p>That is, if <code>as_raw = FALSE</code> we return a character or error if this
-is not possible, otherwise (<code>as_raw = TRUE</code>, <code>as_raw = NULL</code>) we
-always return a list.  This should make programming with because
-the value of <code>as_raw</code> entirely predicts the container type.  Within
-the container, the rule for contents is the same as for <code>get()</code>.</p>
-
-<p>So, the default (<code>as_raw = NULL</code>) returns a list with auto-detected
-types for each element:</p>
-
-<pre><code class="r">txn$mget(c(&quot;string&quot;, &quot;bytes&quot;))
-</code></pre>
-
+</tbody>
+</table>
+<p>That is, if <code>as_raw = FALSE</code> we return a character or error if this is not possible, otherwise (<code>as_raw = TRUE</code>, <code>as_raw = NULL</code>) we always return a list. This should make programming with because the value of <code>as_raw</code> entirely predicts the container type. Within the container, the rule for contents is the same as for <code>get()</code>.</p>
+<p>So, the default (<code>as_raw = NULL</code>) returns a list with auto-detected types for each element:</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" title="1">txn<span class="op">$</span><span class="kw">mget</span>(<span class="kw">c</span>(<span class="st">&quot;string&quot;</span>, <span class="st">&quot;bytes&quot;</span>))</a></code></pre></div>
 <pre><code>## [[1]]
 ## [1] &quot;hello!&quot;
 ## 
 ## [[2]]
-## [1] 2a 00 ff
-</code></pre>
-
+## [1] 2a 00 ff</code></pre>
 <p>Or we could get both as raw</p>
-
-<pre><code class="r">txn$mget(c(&quot;string&quot;, &quot;bytes&quot;), as_raw = TRUE)
-</code></pre>
-
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" title="1">txn<span class="op">$</span><span class="kw">mget</span>(<span class="kw">c</span>(<span class="st">&quot;string&quot;</span>, <span class="st">&quot;bytes&quot;</span>), <span class="dt">as_raw =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## [[1]]
 ## [1] 68 65 6c 6c 6f 21
 ## 
 ## [[2]]
-## [1] 2a 00 ff
-</code></pre>
-
-<p>But because one of the values is binary, we can&#39;t do this:</p>
-
-<pre><code class="r">txn$mget(c(&quot;string&quot;, &quot;bytes&quot;), as_raw = FALSE)
-</code></pre>
-
-<pre><code>## Error in thor_mget(self$.ptr, self$.db$.ptr, key, as_proxy, as_raw): value contains embedded nul bytes; cannot return string
-</code></pre>
-
-<p>But if we only pull strings it&#39;s ok:</p>
-
-<pre><code class="r">txn$mget(c(&quot;string&quot;, &quot;string&quot;), as_raw = FALSE)
-</code></pre>
-
-<pre><code>## [1] &quot;hello!&quot; &quot;hello!&quot;
-</code></pre>
-
-<pre><code class="r">txn$abort()
-</code></pre>
-
+## [1] 2a 00 ff</code></pre>
+<p>But because one of the values is binary, we can’t do this:</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" title="1">txn<span class="op">$</span><span class="kw">mget</span>(<span class="kw">c</span>(<span class="st">&quot;string&quot;</span>, <span class="st">&quot;bytes&quot;</span>), <span class="dt">as_raw =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## Error in thor_mget(self$.ptr, self$.db$.ptr, key, as_proxy, as_raw): value contains embedded nul bytes; cannot return string</code></pre>
+<p>But if we only pull strings it’s ok:</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" title="1">txn<span class="op">$</span><span class="kw">mget</span>(<span class="kw">c</span>(<span class="st">&quot;string&quot;</span>, <span class="st">&quot;string&quot;</span>), <span class="dt">as_raw =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;hello!&quot; &quot;hello!&quot;</code></pre>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" title="1">txn<span class="op">$</span><span class="kw">abort</span>()</a></code></pre></div>
+</div>
+</div>
+<div id="caveats" class="section level2">
 <h2>Caveats</h2>
-
-<p>LMDB will allow multiple process to access the database at the same
-time, but enforce only one write transaction.  <strong>However</strong> to make
-that work relies on file locking.  The LMDB documentation covers
-issues around more detail - all the issues there apply to <code>thor</code>,
-though some of them are ensured by the thor&#39;s design (and because R
-is single threaded some do not really affect us).</p>
-
+<p>LMDB will allow multiple process to access the database at the same time, but enforce only one write transaction. <strong>However</strong> to make that work relies on file locking. The LMDB documentation covers issues around more detail - all the issues there apply to <code>thor</code>, though some of them are ensured by the thor’s design (and because R is single threaded some do not really affect us).</p>
 <ul>
-<li><p>crashed processes may leave stale lockfiles that may need to be
-removed by <code>reader_check()</code></p></li>
-<li><p>do not use LMDB database on remote systems, even between
-processes on the same host, as file locking and memory map sync
-may be unreliable.  This may be disappointing, but if you have
-multiple hosts you really do need a server based solution, not a
-file based one.</p></li>
-<li><p>avoid long-lived transactions, as they can cause the database
-size to grow quickly.</p></li>
+<li><p>crashed processes may leave stale lockfiles that may need to be removed by <code>reader_check()</code></p></li>
+<li><p>do not use LMDB database on remote systems, even between processes on the same host, as file locking and memory map sync may be unreliable. This may be disappointing, but if you have multiple hosts you really do need a server based solution, not a file based one.</p></li>
+<li><p>avoid long-lived transactions, as they can cause the database size to grow quickly.</p></li>
 </ul>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 </body>
-
 </html>
