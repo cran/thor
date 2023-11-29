@@ -12,7 +12,7 @@
 
 <meta name="author" content="Rich FitzJohn" />
 
-<meta name="date" content="2023-02-07" />
+<meta name="date" content="2023-11-29" />
 
 <title>thor</title>
 
@@ -25,6 +25,7 @@
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
     </style>
+
 
 
 <style type="text/css">
@@ -106,13 +107,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
+    var j = 0;
+    while (j < rules.length) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -318,7 +326,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">thor</h1>
 <h4 class="author">Rich FitzJohn</h4>
-<h4 class="date">2023-02-07</h4>
+<h4 class="date">2023-11-29</h4>
 
 
 
@@ -396,7 +404,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>LMDB stores keys in sorted order (not necessarily R’s sorted order - you can see how LMDB sorts things with the <code>cmp</code> method of a transaction - see <code>?mdb_txn</code>), so <code>list</code> will return things in that order.</p>
 <p>Each <em>key</em> has a <em>value</em> (in this case just a hex string)</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">env<span class="op">$</span><span class="kw">get</span>(keys[[<span class="dv">1</span>]])</a></code></pre></div>
-<pre><code>## [1] &quot;ee2e8ad8f31ae0b2f80934a6b7881c41&quot;</code></pre>
+<pre><code>## [1] &quot;42047ffd2662af1b506ad2b698a656c6&quot;</code></pre>
 <p>Delete a key with</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">env<span class="op">$</span><span class="kw">del</span>(keys[[<span class="dv">1</span>]])</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
@@ -415,7 +423,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>The <code>Informational</code> methods all return information about the state of the LMDB environment;</p>
 <p>The path that the data is stored in</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">env<span class="op">$</span><span class="kw">path</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;/tmp/Rtmpa0AJCK/file2066f2706bce60&quot;</code></pre>
+<pre><code>## [1] &quot;/tmp/RtmpoaTTyB/file2076b23792bbed&quot;</code></pre>
 <p>which will contain two files - the actual data and a lock file (see lmdb’s documentation for more on these).</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">dir</span>(env<span class="op">$</span><span class="kw">path</span>())</a></code></pre></div>
 <pre><code>## [1] &quot;data.mdb&quot; &quot;lock.mdb&quot;</code></pre>
