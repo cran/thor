@@ -12,7 +12,7 @@
 
 <meta name="author" content="Rich FitzJohn" />
 
-<meta name="date" content="2023-11-29" />
+<meta name="date" content="2024-09-16" />
 
 <title>thor</title>
 
@@ -326,7 +326,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">thor</h1>
 <h4 class="author">Rich FitzJohn</h4>
-<h4 class="date">2023-11-29</h4>
+<h4 class="date">2024-09-16</h4>
 
 
 
@@ -404,7 +404,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>LMDB stores keys in sorted order (not necessarily R’s sorted order - you can see how LMDB sorts things with the <code>cmp</code> method of a transaction - see <code>?mdb_txn</code>), so <code>list</code> will return things in that order.</p>
 <p>Each <em>key</em> has a <em>value</em> (in this case just a hex string)</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">env<span class="op">$</span><span class="kw">get</span>(keys[[<span class="dv">1</span>]])</a></code></pre></div>
-<pre><code>## [1] &quot;42047ffd2662af1b506ad2b698a656c6&quot;</code></pre>
+<pre><code>## [1] &quot;0b5e713c734fca82a652028196d4268e&quot;</code></pre>
 <p>Delete a key with</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">env<span class="op">$</span><span class="kw">del</span>(keys[[<span class="dv">1</span>]])</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
@@ -423,7 +423,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>The <code>Informational</code> methods all return information about the state of the LMDB environment;</p>
 <p>The path that the data is stored in</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">env<span class="op">$</span><span class="kw">path</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;/tmp/RtmpoaTTyB/file2076b23792bbed&quot;</code></pre>
+<pre><code>## [1] &quot;/tmp/RtmpHcZkDO/file1aaf7c74751f06&quot;</code></pre>
 <p>which will contain two files - the actual data and a lock file (see lmdb’s documentation for more on these).</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">dir</span>(env<span class="op">$</span><span class="kw">path</span>())</a></code></pre></div>
 <pre><code>## [1] &quot;data.mdb&quot; &quot;lock.mdb&quot;</code></pre>

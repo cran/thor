@@ -1,4 +1,4 @@
-0b43429873c9e8484b923cd65714b768 *DESCRIPTION
+35d054d820b748a06244172081b41411 *DESCRIPTION
 9d6da6f15e2f1793660824195e6027ce *LICENSE
 0f0ee71e8a6795ffa6c99bbcc8354a9c *NAMESPACE
 3bed830233d228c8cb549735c4d8998e *NEWS.md
@@ -14,14 +14,14 @@ c4c6d948caf5725425ad8888bb0c7fe1 *R/util.R
 59b017c46795904cbb2ef675b5ede051 *R/util_assert.R
 13666d7f7465270e01a9188b55289ec5 *R/zzz.R
 ba3f968f083ea083d254464a804cc518 *README.md
-6fa4d64c1e4c78338ceef960527f11bc *build/vignette.rds
+2a3a3168b1d20a1972e6635679170ef3 *build/vignette.rds
 99f801d38f5a6753d4f221340ec59360 *cleanup
 99f801d38f5a6753d4f221340ec59360 *cleanup.win
 153d07ef052c4a37a8fac23bc6031972 *inst/LICENSE.lmdb
 3cea8bc0385c978f82caddb274595f91 *inst/WORDLIST
 cf2ad2be402e4b3ce9e83123513ffdba *inst/doc/thor.R
 d0a0fdfed5d4c8acf8205709fc0765bf *inst/doc/thor.Rmd
-8eb47fe1b528d85fdf0eaa0efc124353 *inst/doc/thor.html
+1b2e9aab552ddee78a7bb3409ef6528a *inst/doc/thor.html
 735611966fd90783234705e65cf2ca06 *man/mdb_cursor.Rd
 99ffe54ad61dcd44f625fe93d9746a55 *man/mdb_dbi.Rd
 bba8404e5d9871aa2a78e3ab599f5a19 *man/mdb_env.Rd
@@ -39,9 +39,9 @@ cbbb9b768a6ad99486f36bc4cbffa418 *src/lmdb/midl.c
 d9006f893201cd7cb3c25eec39b44243 *src/lmdb/midl.h
 57e9f2b350505165e4b35184ba716d89 *src/lmdb/version
 91f8642cc4ddca8fc51668493c8b8eeb *src/registration.c
-454ca55b79e71464c6185e83304f8a1c *src/thor.c
+a44df020bc6a3d9c754afb4f08b2c36d *src/thor.c
 4c1817a1058d28b881d221472335a30f *src/thor.h
-874219b02cca3dfddef119c09dc84b3f *src/util.c
+ba2830e80480fb3c97abb9b9658f2ee9 *src/util.c
 aa42ba47bda78f847cbcedb9c8636d48 *src/util.h
 8c22593a3d280f022e44d3b26510a3d0 *tests/testthat.R
 d69859890a9a2f936da8eeec911ffdf2 *tests/testthat/helper-thor.R

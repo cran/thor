@@ -1,6 +1,6 @@
 Package: thor
 Title: Interface to 'LMDB'
-Version: 1.1.5
+Version: 1.1.6
 Authors@R: c(person("Rich", "FitzJohn", role = c("aut", "cre"),
     email = "rich.fitzjohn@gmail.com"),
     person("Howard", "Chu", role = c("aut", "cph")),
@@ -24,7 +24,7 @@ ByteCompile: true
 Encoding: UTF-8
 Language: en-GB
 NeedsCompilation: yes
-Packaged: 2023-11-29 10:45:59 UTC; rfitzjoh
+Packaged: 2024-09-16 12:12:50 UTC; rfitzjoh
 Author: Rich FitzJohn [aut, cre],
   Howard Chu [aut, cph],
   Symas Corporation [cph],
@@ -32,4 +32,4 @@ Author: Rich FitzJohn [aut, cre],
   The OpenLDAP Foundation [cph]
 Maintainer: Rich FitzJohn <rich.fitzjohn@gmail.com>
 Repository: CRAN
-Date/Publication: 2023-11-29 12:30:02 UTC
+Date/Publication: 2024-09-16 17:20:02 UTC
